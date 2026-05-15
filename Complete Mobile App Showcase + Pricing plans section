@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RideLockr</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --card: #161616;
+      --border: #1f1f1f;
+      --green: #00ff88;
+      --green-dim: #00cc6a;
+      --green-glow: rgba(0,255,136,0.18);
+      --blue: #00cfff;
+      --text: #f0f0f0;
+      --muted: #888;
+      --font-head: 'Orbitron', monospace;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+
+    .rl-wrapper {
+      background: var(--bg);
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    /* SECTION HEADER */
+    .section-badge {
+      display: inline-block;
+      font-family: var(--font-head);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      color: var(--green);
+      background: rgba(0,255,136,0.08);
+      border: 1px solid rgba(0,255,136,0.25);
+      padding: 5px 14px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .section-title span {
+      color: var(--green);
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 300;
+      max-width: 540px;
+      line-height: 1.7;
+    }
+
+    /* MOBILE APP SHOWCASE */
+    .app-section {
+      padding: 100px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-section::before {
+      content:'';
+      position:absolute;
+      top:-200px;
+      right:-200px;
+      width:600px;
+      height:600px;
+      background: radial-gradient(circle, rgba(0,255,136,0.06) 0%, transparent 70%);
+      pointer-events:none;
+    }
+
+    .app-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .app-text {
+      display:flex;
+      flex-direction:column;
+    }
+
+    .app-features-list {
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .app-feat-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .app-feat-item:hover {
+      border-color: rgba(0,255,136,0.35);
+      transform: translateX(6px);
+    }
+
+    .feat-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(0,255,136,0.1);
+      border: 1px solid rgba(0,255,136,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .feat-text h4 {
+      font-family: var(--font-head);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--green);
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .feat-text p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* PHONE MOCKUPS */
+    .phone-cluster {
+      display: flex;
+      gap: 20px;
+      align-items: flex-end;
+    }
+
+    .phone-wrap {
+      flex: 1;
+      max-width: 200px;
+    }
+
+    .phone-wrap.elevated {
+      margin-bottom: 40px;
+    }
+
+    .phone-frame {
+      border-radius: 30px;
+      background: #0e0e0e;
+      border: 2px solid #2a2a2a;
+      padding: 14px 10px;
+      box-shadow:
+        0 0 0 1px #111,
+        0 30px 80px rgba(0,0,0,0.8),
+        0 0 60px rgba(0,255,136,0.06);
+      overflow: hidden;
+      transition: 0.4s ease;
+    }
+
+    .phone-frame:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow:
+        0 0 0 1px #222,
+        0 40px 100px rgba(0,0,0,0.9),
+        0 0 80px rgba(0,255,136,0.15);
+    }
+
+    .phone-notch {
+      width: 60px;
+      height: 8px;
+      background: #1a1a1a;
+      border-radius: 4px;
+      margin: 0 auto 12px;
+    }
+
+    .phone-screen {
+      background: #0d1a14;
+      border-radius: 18px;
+      overflow: hidden;
+      aspect-ratio: 9/18;
+      position: relative;
+    }
+
+    /* SCREEN MAP */
+    .screen-map {
+      background: linear-gradient(160deg, #0d1a14 0%, #0a1210 100%);
+      padding: 12px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .map-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .map-header span {
+      font-size: 0.6rem;
+      font-family: var(--font-head);
+      color: var(--green);
+    }
+
+    .map-dot {
+      width:6px;
+      height:6px;
+      background:var(--green);
+      border-radius:50%;
+      box-shadow:0 0 6px var(--green);
+      animation: pulse-dot 1.5s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%,100% {
+        transform:scale(1);
+        opacity:1;
+      }
+      50% {
+        transform:scale(1.6);
+        opacity:0.5;
+      }
+    }
+
+    .map-body {
+      flex:1;
+      background:#0f1f17;
+      border-radius:10px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .map-grid {
+      position:absolute;
+      inset:0;
+      background-image:
+        linear-gradient(rgba(0,255,136,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,136,0.05) 1px, transparent 1px);
+      background-size:18px 18px;
+    }
+
+    .map-pin {
+      position:absolute;
+      top:40%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      width:10px;
+      height:10px;
+      background:var(--green);
+      border-radius:50%;
+      box-shadow:0 0 0 4px rgba(0,255,136,0.2), 0 0 12px var(--green);
+    }
+
+    .map-route {
+      position:absolute;
+      top:20%;
+      left:20%;
+      right:20%;
+      bottom:20%;
+      border-left:2px dashed rgba(0,255,136,0.3);
+      border-bottom:2px dashed rgba(0,255,136,0.3);
+      border-radius:0 0 0 8px;
+    }
+
+    .map-stat {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:6px;
+    }
+
+    .stat-pill {
+      background: rgba(0,255,136,0.07);
+      border:1px solid rgba(0,255,136,0.15);
+      border-radius:8px;
+      padding:6px 8px;
+      text-align:center;
+    }
+
+    .val {
+      font-family:var(--font-head);
+      font-size:0.75rem;
+      color:var(--green);
+      display:block;
+    }
+
+    .lbl {
+      font-size:0.5rem;
+      color:var(--muted);
+      display:block;
+      margin-top:1px;
+    }
+
+    /* ALERT SCREEN */
+    .screen-alert {
+      background:#120d0d;
+      padding:12px;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .alert-head {
+      font-family:var(--font-head);
+      font-size:0.6rem;
+      color:#ff4d6d;
+      text-align:center;
+    }
+
+    .alert-card {
+      background:rgba(255,77,109,0.08);
+      border:1px solid rgba(255,77,109,0.25);
+      border-radius:10px;
+      padding:10px;
+    }
+
+    .alert-icon-row {
+      display:flex;
+      align-items:center;
+      gap:6px;
+      margin-bottom:6px;
+    }
+
+    .alert-dot {
+      width:8px;
+      height:8px;
+      background:#ff4d6d;
+      border-radius:50%;
+      box-shadow:0 0 8px #ff4d6d;
+      animation:pulse-dot 1s infinite;
+    }
+
+    .alert-card h5 {
+      font-family:var(--font-head);
+      font-size:0.6rem;
+      color:#ff4d6d;
+    }
+
+    .alert-card p {
+      font-size:0.52rem;
+      color:var(--muted);
+      margin-top:3px;
+    }
+
+    .alert-btn {
+      width:100%;
+      padding:7px;
+      background: linear-gradient(135deg, #ff4d6d, #c9184a);
+      border:none;
+      border-radius:8px;
+      font-family:var(--font-head);
+      font-size:0.55rem;
+      color:#fff;
+      margin-top:4px;
+      cursor:pointer;
+    }
+
+    .screen-rows {
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      flex:1;
+    }
+
+    .s-row {
+      background: rgba(0,255,136,0.05);
+      border:1px solid rgba(0,255,136,0.1);
+      border-radius:8px;
+      padding:8px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .s-row-info {
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+
+    .s-row-info span:first-child {
+      font-family:var(--font-head);
+      font-size:0.55rem;
+      color:var(--green);
+    }
+
+    .s-row-info span:last-child {
+      font-size:0.5rem;
+      color:var(--muted);
+    }
+
+    /* DIVIDER */
+    .section-divider {
+      width:100%;
+      height:1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      max-width:1100px;
+      margin:auto;
+    }
+    /* PRICING SECTION */
+
+.pricing-section {
+  padding: 100px 24px;
+  position: relative;
+}
+
+.pricing-inner {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.pricing-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.pricing-header .section-sub {
+  margin: auto;
+}
+
+.pricing-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.toggle-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  transition: 0.3s;
+}
+
+.toggle-label.active {
+  color: var(--green);
+}
+
+.toggle-track {
+  width: 50px;
+  height: 26px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  position: relative;
+  cursor: pointer;
+}
+
+.toggle-thumb {
+  width: 18px;
+  height: 18px;
+  background: var(--muted);
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  transition: 0.3s;
+}
+
+.toggle-track.on .toggle-thumb {
+  transform: translateX(24px);
+  background: var(--green);
+}
+
+.save-badge {
+  font-size: 0.65rem;
+  background: rgba(0,255,136,0.12);
+  color: var(--green);
+  border: 1px solid rgba(0,255,136,0.25);
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+
+.price-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 28px;
+  position: relative;
+  transition: 0.4s;
+}
+
+.price-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0,255,136,0.3);
+}
+
+.price-card.featured {
+  border-color: rgba(0,255,136,0.45);
+  background: linear-gradient(160deg, #0f1f15 0%, #0d0d0d 100%);
+}
+
+.featured-ribbon {
+  position: absolute;
+  top: 18px;
+  right: -22px;
+  background: var(--green);
+  color: #000;
+  font-size: 0.55rem;
+  padding: 5px 32px;
+  transform: rotate(45deg);
+}
+
+.card-tier {
+  font-family: var(--font-head);
+  font-size: 0.65rem;
+  color: var(--green);
+  margin-bottom: 10px;
+}
+
+.card-name {
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  margin-bottom: 6px;
+}
+
+.card-desc {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.price-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.price-currency {
+  color: var(--green);
+}
+
+.price-amount {
+  font-family: var(--font-head);
+  font-size: 2.6rem;
+}
+
+.price-period {
+  color: var(--muted);
+}
+
+.device-price {
+  color: var(--muted);
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.features-list {
+  list-style: none;
+  margin-bottom: 28px;
+}
+
+.features-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  color: var(--muted);
+}
+
+.features-list li.included {
+  color: var(--text);
+}
+
+.check-icon,
+.cross-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+}
+
+.check-icon {
+  background: rgba(0,255,136,0.12);
+  border: 1px solid rgba(0,255,136,0.3);
+  color: var(--green);
+}
+
+.cross-icon {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: #444;
+}
+
+.cta-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cta-btn.primary {
+  background: linear-gradient(135deg, var(--green), var(--green-dim));
+  color: #000;
+}
+
+.cta-btn.secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.device-section {
+  margin-top: 60px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 36px 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.device-info h3 {
+  margin-bottom: 8px;
+}
+
+.device-info p {
+  color: var(--muted);
+  max-width: 440px;
+}
+
+.device-price-tag .amount {
+  font-size: 2rem;
+  color: var(--green);
+}
+
+.device-cta {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-outline,
+.btn-solid {
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-outline {
+  border: 1px solid rgba(0,255,136,0.35);
+  background: rgba(0,255,136,0.05);
+  color: var(--green);
+}
+
+.btn-solid {
+  background: linear-gradient(135deg, var(--green), var(--green-dim));
+  border: none;
+  color: #000;
+}
+
+@media(max-width:900px){
+  .pricing-grid {
+    grid-template-columns:1fr;
+  }
+}
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .app-inner {
+        grid-template-columns:1fr;
+        gap:48px;
+      }
+
+      .phone-cluster {
+        justify-content:center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="rl-wrapper">
+
+  <!-- APP SECTION -->
+  <section class="app-section">
+    <div class="app-inner">
+
+      <!-- LEFT -->
+      <div class="app-text">
+
+        <span class="section-badge">Mobile App</span>
+
+        <h2 class="section-title">
+          Your Bike's Security <br>
+          <span>In Your Pocket</span>
+        </h2>
+
+        <p class="section-sub">
+          The RideLockr app puts complete control at your fingertips — live GPS,
+          instant theft alerts, and remote engine kill, all from one sleek dashboard.
+        </p>
+
+        <div class="app-features-list">
+
+          <div class="app-feat-item">
+            <div class="feat-icon">🗺️</div>
+            <div class="feat-text">
+              <h4>Live GPS Map</h4>
+              <p>Track your motorcycle in real-time on an interactive map from anywhere.</p>
+            </div>
+          </div>
+
+          <div class="app-feat-item">
+            <div class="feat-icon">🚨</div>
+            <div class="feat-text">
+              <h4>Instant Theft Alerts</h4>
+              <p>Push notifications the moment unauthorized movement is detected.</p>
+            </div>
+          </div>
+
+          <div class="app-feat-item">
+            <div class="feat-icon">🔒</div>
+            <div class="feat-text">
+              <h4>Remote Immobilizer</h4>
+              <p>Cut the engine remotely with a single tap from the dashboard.</p>
+            </div>
+          </div>
+
+          <div class="app-feat-item">
+            <div class="feat-icon">📍</div>
+            <div class="feat-text">
+              <h4>Geo-fence Zones</h4>
+              <p>Set virtual boundaries and get alerted when your bike crosses them.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="phone-cluster">
+
+        <!-- PHONE 1 -->
+        <div class="phone-wrap elevated">
+          <div class="phone-frame">
+
+            <div class="phone-notch"></div>
+
+            <div class="phone-screen">
+
+              <div class="screen-map">
+
+                <div class="map-header">
+                  <span>LIVE TRACK</span>
+                  <div class="map-dot"></div>
+                </div>
+
+                <div class="map-body">
+                  <div class="map-grid"></div>
+                  <div class="map-route"></div>
+                  <div class="map-pin"></div>
+                </div>
+
+                <div class="map-stat">
+
+                  <div class="stat-pill">
+                    <span class="val">24.8</span>
+                    <span class="lbl">km/h</span>
+                  </div>
+
+                  <div class="stat-pill">
+                    <span class="val">ON</span>
+                    <span class="lbl">Engine</span>
+                  </div>
+
+                  <div class="stat-pill">
+                    <span class="val">98%</span>
+                    <span class="lbl">Battery</span>
+                  </div>
+
+                  <div class="stat-pill">
+                    <span class="val">SAFE</span>
+                    <span class="lbl">Status</span>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- PHONE 2 -->
+        <div class="phone-wrap">
+          <div class="phone-frame">
+
+            <div class="phone-notch"></div>
+
+            <div class="phone-screen">
+
+              <div class="screen-alert">
+
+                <div class="alert-head">⚠ ALERT PANEL</div>
+
+                <div class="alert-card">
+
+                  <div class="alert-icon-row">
+                    <div class="alert-dot"></div>
+                    <h5>MOTION DETECTED</h5>
+                  </div>
+
+                  <p>Unauthorized movement at 02:14 AM — Sector G-11</p>
+
+                  <button class="alert-btn">
+                    🔒 IMMOBILIZE NOW
+                  </button>
+
+                </div>
+
+                <div class="screen-rows">
+
+                  <div class="s-row">
+                    <span>📍</span>
+                    <div class="s-row-info">
+                      <span>Geo-fence</span>
+                      <span>Zone Active</span>
+                    </div>
+                  </div>
+
+                  <div class="s-row">
+                    <span>🛣️</span>
+                    <div class="s-row-info">
+                      <span>Last Trip</span>
+                      <span>12.4 km • 34 min</span>
+                    </div>
+                  </div>
+
+                  <div class="s-row">
+                    <span>🔔</span>
+                    <div class="s-row-info">
+                      <span>Notifications</span>
+                      <span>3 unread alerts</span>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+</div>
+<!-- ════════════════════════════════════════
+     SECTION 2 — PRICING PLANS
+════════════════════════════════════════ -->
+<section class="pricing-section">
+
+  <div class="pricing-inner">
+
+    <!-- HEADER -->
+    <div class="pricing-header">
+
+      <span class="section-badge">Pricing</span>
+
+      <h2 class="section-title">
+        Simple, Transparent <br>
+        <span>Plans for Every Rider</span>
+      </h2>
+
+      <p class="section-sub">
+        Choose the plan that fits your lifestyle. No hidden fees. Cancel anytime.
+      </p>
+
+      <!-- TOGGLE -->
+      <div class="pricing-toggle">
+
+        <span class="toggle-label active" id="monthlyLabel">
+          Monthly
+        </span>
+
+        <div class="toggle-track" id="toggleTrack">
+          <div class="toggle-thumb"></div>
+        </div>
+
+        <span class="toggle-label" id="yearlyLabel">
+          Yearly
+        </span>
+
+        <span class="save-badge">
+          Save 17%
+        </span>
+
+      </div>
+
+    </div>
+
+    <!-- PRICING GRID -->
+    <div class="pricing-grid">
+
+      <!-- BASIC -->
+      <div class="price-card">
+
+        <div class="card-tier">Starter</div>
+
+        <div class="card-name">Basic</div>
+
+        <div class="card-desc">
+          Essential security for individual riders on a budget.
+        </div>
+
+        <div class="price-row">
+          <span class="price-currency">Rs</span>
+          <span class="price-amount" data-monthly="299" data-yearly="249">
+            299
+          </span>
+          <span class="price-period">/mo</span>
+        </div>
+
+        <div class="device-price">
+          Device:
+          <span>Rs 4,999</span>
+          one-time
+        </div>
+
+        <ul class="features-list">
+
+          <li class="included">
+            <span class="check-icon">✓</span>
+            Real-time GPS Tracking
+          </li>
+
+          <li class="included">
+            <span class="check-icon">✓</span>
+            Theft Alerts
+          </li>
+
+          <li class="included">
+            <span class="check-icon">✓</span>
+            Mobile App Access
+          </li>
+
+          <li>
+            <span class="cross-icon">✕</span>
+            Remote Immobilizer
+          </li>
+
+          <li>
+            <span class="cross-icon">✕</span>
+            Geo-fencing
+          </li>
+
+          <li>
+            <span class="cross-icon">✕</span>
+            Trip History (7 days)
+          </li>
+
+          <li>
+            <span class="cross-icon">✕</span>
+            Priority Support
+          </li>
+
+        </ul>
+
+        <button class="cta-btn secondary">
+          Get Started
+        </button>
+
+      </div>
+
+      <!-- PRO -->
+      <div class="price-card featured">
+
+        <div class="featured-ribbon">
+          POPULAR
+        </div>
+
+        <div class="card-tier">
+          Most Popular
+        </div>
+
+        <div class="card-name">
+          Pro
+        </div>
+
+        <div class="card-desc">
+          Full-featured security for daily riders and delivery professionals.
+        </div>
+
+        <div class="price-row">
+          <span class="price-currency">Rs</span>
+          <span class="price-amount" data-monthly="599" data-yearly="499">
+            599
+          </span>
+          <span class="price-period">/mo</span>
+        </div>
+
+        <div class="device-price">
+          Device:
+          <span>Rs 4,999</span>
+          one-time
+        </div>
+
+        <ul class="features-list">
+
+          <li class="included">
+            <span class="check-icon">✓</span>
+            Real-time GPS Tracking
+          </li>
+
+          <li class="included">
+            <span class="check-icon">✓</span>
+            Theft Alerts
+          </li>
+
+          <li class="included">
+            <span class="check-icon">✓</span>
+            Mobile App Access
+          </li>
+
+          <li class="included">
+            <span class="check-icon">✓</span>
+            Remote Immobilizer
+          </li>
+
+          <li class="included">
+            <span class="check-icon">✓</span>
+            Geo-fencing
+          </li>
+
+          <li class="included">
+            <span class="check-icon">✓</span>
+            Trip History (30 days)
+          </li>
+
+          <li>
+            <span class="cross-icon">✕</span>
+            Priority Support
+          </li>
+
+        </ul>
+
+        <button class="cta-btn primary">
+          Start Free Trial
+        </button>
+
+      </div>
+
+      <!-- FLEET -->
+      <div class="price-card">
+
+        <div class="card-tier">
+          Enterprise
+        </div>
+
+        <div class="card-name">
+          Fleet
+        </div>
+
+        <div class="card-desc">
+          Scalable management for businesses with multiple vehicles.
+        </div>
+
+        <div class="price-row">
+          <span class="price-currency">Rs</span>
+          <span class="price-amount" data-monthly="1499" data-yearly="1199">
+            1499
+          </span>
+          <span class="price-period">/mo</span>
+        </div>
+
+        <div class="device-price">
+          Device:
+          <span>Rs 4,499</span>
+          one-time
+        </div>
+
+        <ul class="features-list">
+
+          <li class="included">
+            <span class="check-icon">✓</span>
+            Real-time GPS Tracking
+          </li>
+
+          <li class="included">
+            <span class="check-icon">✓</span>
+            Theft Alerts
+          </li>
+
+          <li class="included">
+            <span class="check-icon">✓</span>
+            Mobile App Access
+          </li>
+
+          <li class="included">
+            <span class="check-icon">✓</span>
+            Remote Immobilizer
+          </li>
+
+          <li class="included">
+            <span class="check-icon">✓</span>
+            Geo-fencing (Unlimited)
+          </li>
+
+          <li class="included">
+            <span class="check-icon">✓</span>
+            Trip History (Unlimited)
+          </li>
+
+          <li class="included">
+            <span class="check-icon">✓</span>
+            Dedicated Support
+          </li>
+
+        </ul>
+
+        <button class="cta-btn secondary">
+          Contact Sales
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- DEVICE SECTION -->
+    <div class="device-section">
+
+      <div class="device-info">
+
+        <h3>
+          RideLockr Hardware Device
+        </h3>
+
+        <p>
+          The compact IoT module installs in under 30 minutes on any motorcycle.
+          Weatherproof, tamper-resistant, and powered by your bike's battery.
+        </p>
+
+      </div>
+
+      <div class="device-price-tag">
+
+        <span class="one-time">
+          ONE-TIME PURCHASE
+        </span>
+
+        <span class="amount">
+          Rs 4,999
+        </span>
+
+        <span class="sub">
+          Free installation included
+        </span>
+
+      </div>
+
+      <div class="device-cta">
+
+        <button class="btn-outline">
+          Learn More
+        </button>
+
+        <button class="btn-solid">
+          Order Device
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<script>
+  console.log("RideLockr Loaded");
+
+  const toggleTrack = document.getElementById("toggleTrack");
+  const monthlyLabel = document.getElementById("monthlyLabel");
+  const yearlyLabel = document.getElementById("yearlyLabel");
+
+  let yearly = false;
+
+  toggleTrack.addEventListener("click", () => {
+
+    yearly = !yearly;
+
+    toggleTrack.classList.toggle("on");
+
+    monthlyLabel.classList.toggle("active");
+    yearlyLabel.classList.toggle("active");
+
+    document.querySelectorAll(".price-amount").forEach(price => {
+
+      const monthlyPrice = price.dataset.monthly;
+      const yearlyPrice = price.dataset.yearly;
+
+      price.textContent = yearly ? yearlyPrice : monthlyPrice;
+
+    });
+
+  });
+</script>
+
+
+</body>
+</html>
