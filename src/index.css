@@ -4,20 +4,20 @@
 @tailwind utilities;
 
 :root {
-  /* RideLockr Signature Colors */
+ 
   --bg-black: #050505;
   --bg-dark-green: #061105; 
   --neon-green: #39FF14;
 }
 
-/* Smooth Scrolling setup */
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
   background-color: var(--bg-black);
-  /* Top par premium neon green glow gradient */
+  
   background-image: radial-gradient(circle at top, var(--bg-dark-green), var(--bg-black));
   color: white;
   margin: 0;
@@ -27,13 +27,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom selection color */
+
 ::selection {
   background-color: var(--neon-green);
   color: black;
 }
 
-/* Scrollbar styling for modern look */
+
 ::-webkit-scrollbar {
   width: 6px;
 }

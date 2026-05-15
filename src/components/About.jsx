@@ -17,7 +17,7 @@ const About = () => {
         }
       });
 
-      // EchoSee style elements reveal
+    
       tl.from(".about-element", {
         opacity: 0,
         y: 40,
@@ -33,13 +33,13 @@ const About = () => {
   return (
     <section ref={aboutRef} className="relative py-32 bg-[#050505] overflow-hidden font-sans border-t border-white/5">
       
-      {/* Background Subtle Glow */}
+      
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#39FF14]/5 blur-[120px] rounded-full z-0 pointer-events-none"></div>
 
       <div className="relative z-10 container mx-auto px-6 max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           
-          {/* Left Side: Visual Card (Vision & Mission) */}
+      
           <div className="about-element relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-[#39FF14]/20 to-transparent rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
             <div className="relative bg-black border border-white/10 p-12 rounded-3xl h-[450px] flex flex-col justify-end">
@@ -51,7 +51,7 @@ const About = () => {
             </div>
           </div>
 
-          {/* Right Side: Text Content (Problem & Intro) */}
+         
           <div className="space-y-10">
             <div className="about-element inline-block px-4 py-1.5 border border-[#39FF14]/30 bg-[#39FF14]/5 rounded-full">
               <span className="text-[#39FF14] text-[10px] font-black uppercase tracking-[0.3em]">About RideLockr</span>
@@ -71,7 +71,7 @@ const About = () => {
               </p>
             </div>
 
-            {/* Feature Badges inspired by EchoSee precision */}
+          
             <div className="about-element pt-10 flex gap-12 border-t border-white/5">
               <div>
                 <p className="text-4xl font-black text-white italic uppercase">GPS</p>
