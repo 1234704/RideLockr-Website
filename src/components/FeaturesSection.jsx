@@ -4,47 +4,49 @@ const features = [
   {
     icon: "📍",
     title: "Real-Time GPS Tracking",
-    description: "Track your motorcycle live on map, anytime anywhere with pinpoint accuracy.",
+    description: "Monitor your motorcycle's exact location live on an interactive map — 24/7, from anywhere in the world.",
     color: "from-green-500 to-emerald-400"
   },
   {
     icon: "🚨",
     title: "Theft Alerts",
-    description: "Instant alerts on your phone if someone touches or moves your bike.",
+    description: "Receive instant push notifications the moment unauthorized movement or tampering is detected.",
     color: "from-red-500 to-orange-400"
   },
   {
     icon: "🔒",
     title: "Remote Engine Immobilizer",
-    description: "Lock your engine remotely with one tap from the app, anywhere in the world.",
+    description: "Disable your motorcycle's engine remotely with a single tap — preventing theft in real time.",
     color: "from-blue-500 to-cyan-400"
   },
   {
     icon: "📐",
     title: "Geo-Fencing",
-    description: "Set a safe zone and get instant alert if your bike leaves that area.",
+    description: "Define a virtual safety boundary. Get alerted immediately if your bike exits the designated zone.",
     color: "from-purple-500 to-pink-400"
   },
   {
     icon: "🔔",
     title: "Live Notifications",
-    description: "Real-time push notifications for every security event, 24/7.",
+    description: "Stay informed with real-time alerts for every security event — delivered instantly to your device.",
     color: "from-yellow-500 to-amber-400"
   },
 ];
-
 const FeatureCard = ({ feature, index }) => {
   const [visible, setVisible] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {
+  const timer = setTimeout(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
-  }, []);
+  }, 100);
+  return () => clearTimeout(timer);
+}, []);
 
   return (
     <div
