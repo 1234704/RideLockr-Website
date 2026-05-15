@@ -13,7 +13,7 @@ const Features = () => {
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           
-          {/* Left: Interactive Dashboard Mockup */}
+         
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -28,10 +28,10 @@ const Features = () => {
               </div>
             </div>
 
-            {/* Map Placeholder Graphic */}
+          
             <div className="h-64 bg-gray-800/30 rounded-2xl mb-6 border border-white/5 flex items-center justify-center overflow-hidden relative">
                <Navigation className="text-[#39FF14] rotate-45" size={40} />
-               {/* Carbon Fiber Pattern Overlay */}
+               
                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
                <p className="absolute bottom-4 text-[10px] font-mono text-gray-500 uppercase tracking-[0.3em]">Awaiting GPS Lock...</p>
             </div>
@@ -46,7 +46,7 @@ const Features = () => {
             </div>
           </motion.div>
 
-          {/* Right: Features List */}
+          
           <div className="space-y-12">
             <h2 className="text-5xl md:text-6xl font-black italic uppercase leading-none tracking-tighter">
               The <span className="text-[#39FF14]">Core</span> <br /> Intelligence.

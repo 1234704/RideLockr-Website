@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Activity, Battery, Zap, Globe } from 'lucide-react';
 
 const AnalyticsGrid = () => {
-  // Static heights taake Math.random ka jhamela hi khatam ho jaye
+  
   const staticHeights = [40, 70, 45, 90, 65, 30, 85, 50, 75, 40, 60, 80, 35, 55, 70, 45, 90, 65, 30, 85, 50, 75, 40, 60, 80, 35, 55, 70, 45, 90, 65, 30, 85, 50, 75, 40, 60, 80, 35, 55];
 
   const stats = [
@@ -39,7 +39,7 @@ const AnalyticsGrid = () => {
           ))}
         </div>
 
-        {/* Technical Graph Mockup */}
+        
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -55,7 +55,7 @@ const AnalyticsGrid = () => {
                   animate={{ height: [20, h, 20] }}
                   transition={{ 
                     repeat: Infinity, 
-                    duration: 1.5, // Fixed duration
+                    duration: 1.5, 
                     delay: i * 0.05,
                     ease: "easeInOut"
                   }}
