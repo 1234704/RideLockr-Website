@@ -1,16 +1,28 @@
-# React + Vite
+# RideLockr - IoT Motorcycle Security Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, high-performance tech startup landing page designed to showcase RideLockr's IoT anti-theft and smart tracking system. Built with a dark, cyber-security aesthetic (`zinc-950` and `emerald-500` accents).
 
-Currently, two official plugins are available:
+##  Tech Stack
+* **Frontend:** React.js, Vite
+* **Styling:** Tailwind CSS v4 (Zero-config, high-performance styling)
+* **Animations:** Framer Motion (Hardware-accelerated)
+* **Icons:** Lucide React
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+##  Core Domains Developed
+**1. "How It Works" Interactive Stepper**
+* Converted a standard vertical workflow into an interactive, state-driven UI.
+* Features a dynamic vertical progress line that tracks the user's active step.
+* Utilizes `AnimatePresence` for smooth height expansion when reading step details.
 
-## React Compiler
+**2. "Target Customers" Solutions Dashboard**
+* Engineered a tabbed dashboard interface tailored for specific user demographics (Delivery, Students, Commuters, Fleets).
+* Implemented staggered entry animations for security benefits using Framer Motion `staggerChildren`.
+* Designed with premium `backdrop-blur` glassmorphism and ambient rotating watermark graphics.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+##  Performance Optimizations Applied
+* Offloaded continuous ambient animations (glows and rotations) to the GPU using `will-change: transform`.
+* Replaced heavy layout blurs with solid layer composites for maximum frame rates on older devices.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+##  Primary Contributor
+**Shahar Yar** - Frontend Engineering (Workflow & Demographics Domains)
+*Branch:* `feature/Shaharyar-how-it-works-customers`
