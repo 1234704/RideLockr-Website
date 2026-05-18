@@ -6,7 +6,7 @@ const Footer = () => {
     <section className="py-24 bg-[#050505] text-white px-6 border-t border-white/5">
       <div className="container mx-auto">
         
-        {/* Comparison Table */}
+       
         <div className="mb-32 overflow-hidden rounded-[2rem] border border-white/5 bg-white/5 backdrop-blur-xl">
           <div className="grid grid-cols-3 p-8 border-b border-white/10 bg-white/5 font-black uppercase italic tracking-widest text-xs text-gray-500">
             <div>Feature</div>
@@ -27,7 +27,7 @@ const Footer = () => {
           ))}
         </div>
 
-        {/* Final CTA Area */}
+       
         <div className="text-center space-y-10">
           <motion.h2 
             initial={{ scale: 0.9, opacity: 0 }}
