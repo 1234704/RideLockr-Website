@@ -54,7 +54,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-32 pt-8 border-t border-white/5 text-center text-[10px] font-mono text-gray-600 uppercase tracking-[0.5em]">
-          © 2026 RIDELOCKR SYSTEM | DESIGNED BY EURUS
+          © 2026 RIDELOCKR SYSTEM
         </div>
       </div>
     </section>

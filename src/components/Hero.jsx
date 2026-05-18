@@ -1,100 +1,84 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { TextPlugin } from 'gsap/TextPlugin';
-
-
-gsap.registerPlugin(TextPlugin);
+import { motion } from 'framer-motion';
+import heroDashboardImg from '../assets/hero-dashboard.jpg'; 
 
 const Hero = () => {
-  const heroRef = useRef(null);
-  const taglineRef = useRef(null);
-
-  useEffect(() => {
-    let ctx = gsap.context(() => {
-      const tl = gsap.timeline();
-
-      
-      tl.from(".hero-element", {
-        opacity: 0,
-        y: 50,
-        scale: 0.98,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "expo.out",
-        clearProps: "transform"
-      })
-      
-     
-      .fromTo(taglineRef.current, 
-        { width: "0%" }, 
-        { 
-          width: "100%", 
-          duration: 1.5, 
-          ease: "steps(40)",
-        }, "-=0.4"
-      );
-    }, heroRef);
-    
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center bg-[#050505] overflow-hidden font-sans">
+    <section id="home" className="relative min-h-screen flex items-center bg-[#050505] text-white px-6 pt-24 md:pt-16 overflow-hidden">
       
      
-      <div className="absolute inset-0 w-full h-full z-0">
-        <div className="absolute inset-0 bg-black/80 z-10"></div>
-        
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#39FF14]/5 blur-[120px] rounded-full z-0"></div>
-        
-     
-        <img 
-          src="/ridelockr-bg.jpg" 
-          alt="RideLockr Smart Security" 
-          className="w-full h-full object-cover opacity-40"
-          onError={(e) => {
-            e.target.style.display = 'none'; 
-          }}
-        />
-      </div>
+      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-[#39FF14]/5 rounded-full blur-[150px] pointer-events-none" />
 
-      <div className="relative z-20 text-center px-6 max-w-7xl">
-        
-        <h1 className="hero-element text-6xl md:text-[9rem] font-black text-white tracking-tighter mb-4 uppercase italic leading-none">
-          Ride<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#39FF14] to-[#16650d] drop-shadow-[0_0_15px_rgba(57,255,20,0.3)]">Lockr</span>
-        </h1>
-
-      
-        <div className="hero-element inline-block mb-8">
-          <div className="overflow-hidden border-r-4 border-[#39FF14] pr-3" ref={taglineRef} style={{ whiteSpace: 'nowrap' }}>
-            <h2 className="text-xl md:text-4xl font-bold text-white tracking-tight py-1 uppercase">
-              "Security That Never Sleeps"
-            </h2>
-          </div>
-        </div>
-
-        
-        <p className="hero-element text-gray-400 text-lg md:text-2xl max-w-2xl mx-auto mb-16 font-medium tracking-tight leading-relaxed">
-          The next generation of IoT-powered motorcycle security. Real-time GPS tracking, 
-          remote control, and anti-theft protection at your fingertips.
-        </p>
-
-        
-        <div className="hero-element flex flex-col sm:flex-row gap-6 justify-center items-center mt-4">
-          <button className="group relative px-14 py-5 bg-[#39FF14] text-black text-base font-black rounded-full overflow-hidden transition-all duration-500 hover:shadow-[0_0_30px_rgba(57,255,20,0.5)] active:scale-95 z-30 uppercase tracking-widest">
-            <span className="relative z-10">Pre-Order Now</span>
-          </button>
+      <div className="container mx-auto max-w-7xl relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          <button className="px-14 py-5 border-2 border-white/10 text-white text-base font-bold rounded-full hover:bg-white/5 backdrop-blur-xl transition-all active:scale-95 z-30 uppercase tracking-widest">
-            Explore Features
-          </button>
-        </div>
-      </div>
+          
+          <div className="lg:col-span-5 flex flex-col justify-center text-left">
+            
+          
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-[1.1] text-white uppercase select-none"
+            >
+              RideLockr <span className="block font-normal lowercase italic text-xl md:text-2xl tracking-normal text-gray-400 mt-1 normal-case">IoT-powered</span>
+              <span className="block text-[#39FF14] mt-1 italic tracking-tight">smart motorcycle</span> 
+              <span className="block tracking-tight">anti-theft system.</span>
+            </motion.h1>
 
-   
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-50 flex flex-col items-center gap-2">
-        <span className="text-[10px] text-[#39FF14] uppercase tracking-[0.3em] font-bold">Secure</span>
-        <div className="w-[1px] h-10 bg-gradient-to-b from-[#39FF14] to-transparent"></div>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="mt-4 text-gray-400 text-xs md:text-sm leading-relaxed font-medium max-w-xl"
+            >
+              Every day, thousands of motorcycle owners face the constant anxiety of vehicle theft. 
+              We bridge the gap between traditional locks and cutting-edge hardware security, 
+              giving you absolute mobile control over your ride anytime, anywhere.
+            </motion.p>
+
+            
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-8"
+            >
+              <button className="inline-flex items-center gap-3 px-6 py-3.5 bg-[#39FF14] text-black font-extrabold text-[11px] uppercase tracking-widest rounded-full hover:bg-[#32e010] hover:shadow-[0_0_30px_rgba(57,255,20,0.4)] transition-all duration-300 group">
+                Watch Demo 
+                <span className="flex items-center justify-center w-4 h-4 rounded-full border border-black/20 text-[9px] font-bold group-hover:translate-x-0.5 transition-transform">
+                  ▶
+                </span>
+              </button>
+            </motion.div>
+
+          </div>
+
+          
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.98, x: 30 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="lg:col-span-7 w-full flex justify-center lg:justify-end relative"
+          >
+            
+            <div className="absolute -inset-1.5 bg-[#39FF14]/10 rounded-[2.5rem] blur-xl opacity-40 pointer-events-none" />
+
+            
+            <div className="relative rounded-[2.5rem] border border-white/10 overflow-hidden bg-[#0d0d0d] shadow-2xl aspect-[4/3] w-full max-w-3xl">
+              <img 
+                src={heroDashboardImg} 
+                alt="RideLockr Ecosystem Interface Dashboard" 
+                className="w-full h-full object-cover select-none pointer-events-none"
+              />
+              
+              
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 pointer-events-none" />
+            </div>
+
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );
