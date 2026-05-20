@@ -1,4 +1,12 @@
+import { useNavigate } from 'react-router-dom';
+
 const Footer = () => {
+  const navigate = useNavigate();
+
+  const navigateToContact = () => {
+    navigate("/contact");
+  };
+
   return (
     <footer className="bg-[#050505] border-t border-white/[0.08] py-16 text-white">
       <div className="mx-auto max-w-7xl px-6 grid gap-10 md:grid-cols-12">
@@ -78,7 +86,7 @@ const Footer = () => {
             <button
               type="button"
               className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-[#39FF14] px-5 py-3 text-xs font-bold uppercase tracking-widest text-black shadow-[0_0_20px_rgba(57,255,20,0.25)] transition hover:bg-[#55ff3c]"
-              onClick={() => (window.location.href = "/contact")}
+              onClick={navigateToContact}
             >
               Join waitlist
             </button>

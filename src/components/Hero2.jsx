@@ -1,7 +1,24 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, X, Send } from "lucide-react";
+import { Check, X, Send, CheckCircle } from "lucide-react";
 
 const Hero2 = () => {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleJoinWaitlist = (e) => {
+    e.preventDefault();
+
+    const trimmed = email.trim();
+    if (!trimmed) return;
+
+    // Browser already validates `type="email"`, but keep this guard anyway.
+    setSubmitted(true);
+    setEmail("");
+
+    setTimeout(() => setSubmitted(false), 5000);
+  };
+
   return (
     <section className="py-24 bg-[#050505] text-white px-6 border-t border-white/5">
       <div className="container mx-auto">
@@ -52,16 +69,34 @@ const Hero2 = () => {
             today and never worry about your bike again.
           </p>
 
-          <div className="flex flex-col md:flex-row justify-center items-center gap-6">
-            <input
-              type="email"
-              placeholder="ENTER YOUR EMAIL"
-              className="w-full md:w-96 rounded-full border border-white/10 bg-[#0a0a0a] px-8 py-5 text-xs font-black uppercase tracking-widest text-white outline-none focus:border-[#39FF14] transition"
-            />
-            <button className="flex items-center gap-3 rounded-full bg-[#39FF14] px-12 py-5 text-sm font-black uppercase tracking-widest text-black transition hover:bg-[#2fd814]">
-              Join Waitlist <Send size={18} />
-            </button>
-          </div>
+          {submitted ? (
+            <div className="flex flex-col items-center justify-center gap-4 rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-xl px-8 py-12 max-w-xl mx-auto">
+              <CheckCircle size={56} className="text-[#39FF14]" />
+              <h3 className="text-3xl font-black text-white">
+                You’re on the waitlist!
+              </h3>
+              <p className="text-gray-400 text-sm">
+                Thanks! We’ll email you when RideLockr is ready.
+              </p>
+            </div>
+          ) : (
+            <form
+              onSubmit={handleJoinWaitlist}
+              className="flex flex-col md:flex-row justify-center items-center gap-6"
+            >
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="ENTER YOUR EMAIL"
+                className="w-full md:w-96 rounded-full border border-white/10 bg-[#0a0a0a] px-8 py-5 text-xs font-black uppercase tracking-widest text-white outline-none focus:border-[#39FF14] transition"
+              />
+              <button className="flex items-center gap-3 rounded-full bg-[#39FF14] px-12 py-5 text-sm font-black uppercase tracking-widest text-black transition hover:bg-[#2fd814]">
+                Join Waitlist <Send size={18} />
+              </button>
+            </form>
+          )}
         </div>
 
         {/* <div className="mt-32 pt-8 border-t border-white/5 text-center text-[10px] font-mono text-gray-600 uppercase tracking-[0.5em]">
