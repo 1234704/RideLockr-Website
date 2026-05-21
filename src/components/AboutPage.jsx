@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import bikeImg from "../assets/bike.jpg";
 
 const AboutPage = () => {
   const aboutRef = useRef(null);
@@ -31,24 +32,35 @@ const AboutPage = () => {
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           <div className="about-element relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-[#39FF14]/20 to-transparent rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-            <div className="relative bg-black border border-white/10 p-12 rounded-3xl h-[450px] flex flex-col justify-end">
-              <h4 className="text-[#39FF14] text-xs font-black tracking-[0.4em] uppercase mb-6">
-                Our Core Vision
-              </h4>
-              <p className="text-white text-3xl md:text-4xl font-light leading-snug">
-                "Eliminating the threat of vehicle theft through seamless IoT
-                integration."
-              </p>
-              <div className="mt-10 w-20 h-[2px] bg-[#39FF14]"></div>
+            <div className="relative bg-black border border-white/10 p-12 rounded-3xl h-[450px] overflow-hidden">
+              {/* Image */}
+              <img
+                src={bikeImg}
+                alt="Bike"
+                className="absolute inset-0 w-full h-full object-cover opacity-70"
+              />
+
+              {/* Gradient overlay for readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none" />
+
+              {/* Content */}
+              <div className="relative h-full flex flex-col justify-end">
+                <h4 className="text-[#39FF14] text-xs font-black tracking-[0.4em] uppercase mb-6">
+                  Our Core Vision
+                </h4>
+                <p className="text-white text-3xl md:text-4xl font-light leading-snug">
+                  "Eliminating the threat of vehicle theft through seamless IoT
+                  integration."
+                </p>
+                <div className="mt-10 w-20 h-[2px] bg-[#39FF14]"></div>
+              </div>
             </div>
           </div>
 
           <div className="space-y-10">
-           
-               <h2 className="text-[#39FF14] text-sm font-black uppercase tracking-[0.35em] mb-3">
-            About RideLockr
-          </h2>
-          
+            <h2 className="text-[#39FF14] text-sm font-black uppercase tracking-[0.35em] mb-3">
+              About RideLockr
+            </h2>
 
             <h2 className="about-element section-title text-5xl md:text-7xl leading-none">
               Your Ride. <br />

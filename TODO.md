@@ -1,5 +1,0 @@
-- [ ] Inspect Hero2.jsx current join waitlist implementation
-- [ ] Implement email capture + submit handler in Hero2.jsx
-- [ ] Add success popup message UI in Hero2.jsx
-- [ ] Auto-hide popup after a few seconds
-- [ ] Quick manual test: enter email + click Join Waitlist -> popup appears and disappears
