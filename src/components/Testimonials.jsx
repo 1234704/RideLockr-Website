@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import img1 from "../assets/img1.jpg";
+import img2 from "../assets/img2.jpg";
+import img3 from "../assets/img3.jpg";
 
 const testimonials = [
   {
@@ -9,7 +12,7 @@ const testimonials = [
     comment:
       "RideLock saved my bike from being stolen. Real-time alert helped me take immediate action. Best security system ever!",
     rating: 5,
-    image: "/images/delivery rider.jpg",
+    image: img1,
   },
   {
     id: 2,
@@ -18,7 +21,7 @@ const testimonials = [
     comment:
       "GPS tracking is very accurate. I always know exactly where my bike is. Highly recommended!",
     rating: 5,
-    image: "/images/Student.jpg",
+    image: img3,
   },
   {
     id: 3,
@@ -27,7 +30,7 @@ const testimonials = [
     comment:
       "Geo-fencing feature is amazing. Whenever my bike leaves the designated area, I get instant alerts. Complete peace of mind!",
     rating: 5,
-    image: "/images/Daily commuter.jpg",
+    image: img2,
   },
 ];
 
@@ -67,8 +70,8 @@ const Testimonials = () => {
     <section className="py-28 px-6 bg-[#050505] text-white">
       <div className="mx-auto max-w-6xl">
         <div className="text-center mb-16">
-           <h2 className="text-[#39FF14] text-sm font-black uppercase tracking-[0.35em] mb-3">
-           Customer Reviews
+          <h2 className="text-[#39FF14] text-sm font-black uppercase tracking-[0.35em] mb-3">
+            Customer Reviews
           </h2>
           <h2 className="section-title text-4xl md:text-5xl">
             What Riders Say About RideLockr
